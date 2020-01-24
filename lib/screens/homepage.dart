@@ -25,7 +25,14 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                   leading: Icon(Icons.dashboard),
                   title: Text("Dashboard"),
-                  onTap: () {})
+                  onTap: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyTabBar()
+                    )
+                    );
+                  })
 
             ],
           ),
