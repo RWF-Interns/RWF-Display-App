@@ -23,12 +23,16 @@ class MyTabBar extends StatelessWidget {
           ),
         ),
         body: TabBarView(
-          children: choices.map((Choice choice) {
+         
+          children:
+          
+           choices.map((Choice choice) {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: ChoiceCard(choice: choice),
             );
           }).toList(),
+          
         ),
       ),
     );

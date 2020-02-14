@@ -1,4 +1,5 @@
 import 'package:RWF/custom_widgets/my_drawer_widget.dart';
+import 'package:RWF/custom_widgets/my_table.dart';
 import 'package:RWF/custom_widgets/my_tabs.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,17 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        body: MyTabBar(),
+        body: 
+        Container(
+          child: ListView(
+            children: <Widget>[
+            MyTabBar(),
+            MyTable()
+            ],
+          ),
+        )
+        
+        
         
 
       ),
