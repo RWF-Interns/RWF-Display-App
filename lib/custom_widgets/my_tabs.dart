@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 
 class MyTabBar extends StatelessWidget {
   @override
@@ -8,11 +12,10 @@ class MyTabBar extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Production Information'),
-          backgroundColor: Color(0xFF463409),
+          backgroundColor: Color(0xFF5B58E3),
           bottom: TabBar(
-            
             indicatorSize: TabBarIndicatorSize.tab,
-            indicator: BoxDecoration(color: Color(0xFF846211)),
+            indicator: BoxDecoration(color: Color(0xFF5B58E3).withOpacity(0.5)),
             isScrollable: true,
             tabs: choices.map((Choice choice) {
               return Tab(
@@ -22,17 +25,73 @@ class MyTabBar extends StatelessWidget {
             }).toList(),
           ),
         ),
-        body: TabBarView(
-         
-          children:
-          
-           choices.map((Choice choice) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ChoiceCard(choice: choice),
-            );
-          }).toList(),
-          
+        body: Column(
+          children: <Widget>[
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Table 1',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Table 2',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Table 3',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -72,7 +131,6 @@ class ChoiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle textStyle = Theme.of(context).textTheme.display1;
     return Card(
       color: Colors.white,
       child: Center(
@@ -80,7 +138,7 @@ class ChoiceCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Icon(choice.icon, size: 128.0, color: textStyle.color),
+            Icon(choice.icon, size: 12.0, color: Colors.red),
           ],
         ),
       ),
