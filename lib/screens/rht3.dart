@@ -112,10 +112,10 @@ class _Rht3State extends State<Rht3> {
           title: Text('Rht3'),
         ),
         body: ListView(
+          scrollDirection: Axis.horizontal,
           children: [
             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8.0),
+              scrollDirection: Axis.vertical,
               child: noOfColumns > 0 ? originalTable : dummyTable,
             ),
           ],

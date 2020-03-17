@@ -112,10 +112,10 @@ class _Xc2State extends State<Xc2> {
           title: Text('Xc2'),
         ),
         body: ListView(
+          scrollDirection: Axis.horizontal,
           children: [
             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8.0),
+              scrollDirection: Axis.vertical,
               child: noOfColumns > 0 ? originalTable : dummyTable,
             ),
           ],

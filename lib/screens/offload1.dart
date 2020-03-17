@@ -112,10 +112,10 @@ class _Offload1State extends State<Offload1> {
           title: Text('Offload1'),
         ),
         body: ListView(
+          scrollDirection: Axis.horizontal,
           children: [
             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8.0),
+              scrollDirection: Axis.vertical,
               child: noOfColumns > 0 ? originalTable : dummyTable,
             ),
           ],

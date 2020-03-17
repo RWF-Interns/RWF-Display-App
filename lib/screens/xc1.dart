@@ -112,10 +112,10 @@ class _Xc1State extends State<Xc1> {
           title: Text('Xc1'),
         ),
         body: ListView(
+          scrollDirection: Axis.horizontal,
           children: [
             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8.0),
+              scrollDirection: Axis.vertical,
               child: noOfColumns > 0 ? originalTable : dummyTable,
             ),
           ],
@@ -134,7 +134,7 @@ class _Xc1State extends State<Xc1> {
   static List<DataColumn> getColNames() {
     List<DataColumn> colChildren = [];
     for (int i = 0; i < colNames.length; i++) {
-      colChildren.add(DataColumn(label: Text(colNames[i]??'null')));
+      colChildren.add(DataColumn(label: Text(colNames[i] ?? 'null')));
     }
     print(colChildren.length);
     noOfColumns = colChildren.length;

@@ -112,10 +112,10 @@ class _XcProducingMoulds2State extends State<XcProducingMoulds2> {
           title: Text('XcProducingMoulds2'),
         ),
         body: ListView(
+          scrollDirection: Axis.horizontal,
           children: [
             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8.0),
+              scrollDirection: Axis.vertical,
               child: noOfColumns > 0 ? originalTable : dummyTable,
             ),
           ],

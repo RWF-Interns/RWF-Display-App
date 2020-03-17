@@ -26,7 +26,7 @@ class _Grinding3State extends State<Grinding3> {
     //var url = 'https://c00c9f1e.ngrok.io/12';
     var response = await http.get(url+"/12");
     print('Response status: ${response.statusCode}');
-    //var data = response.body;
+    var data = response.body;
     //debugPrint(data);
 
     Map valueMap = json.decode(data);
@@ -112,10 +112,10 @@ class _Grinding3State extends State<Grinding3> {
           title: Text('Grinding3'),
         ),
         body: ListView(
+          scrollDirection: Axis.horizontal,
           children: [
             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8.0),
+              scrollDirection: Axis.vertical,
               child: noOfColumns > 0 ? originalTable : dummyTable,
             ),
           ],
