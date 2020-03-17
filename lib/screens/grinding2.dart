@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:RWF/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,8 +23,8 @@ List<DataRow> tuples = [];
 class _Grinding2State extends State<Grinding2> {
   getData() async {
     colNames = [];
-    var url = 'https://c00c9f1e.ngrok.io/11';
-    var response = await http.get(url);
+    //var url = 'https://c00c9f1e.ngrok.io/11';
+    var response = await http.get(url+"/11");
     print('Response status: ${response.statusCode}');
     var data = response.body;
     //debugPrint(data);

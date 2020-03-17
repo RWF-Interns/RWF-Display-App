@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:RWF/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,10 +23,10 @@ List<DataRow> tuples = [];
 class _Grinding3State extends State<Grinding3> {
   getData() async {
     colNames = [];
-    var url = 'https://c00c9f1e.ngrok.io/12';
-    var response = await http.get(url);
+    //var url = 'https://c00c9f1e.ngrok.io/12';
+    var response = await http.get(url+"/12");
     print('Response status: ${response.statusCode}');
-    var data = response.body;
+    //var data = response.body;
     //debugPrint(data);
 
     Map valueMap = json.decode(data);

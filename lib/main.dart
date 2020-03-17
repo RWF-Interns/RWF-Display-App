@@ -18,6 +18,8 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
+var url = 'http://68e89c84.ngrok.io';
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
