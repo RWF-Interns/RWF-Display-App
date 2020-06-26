@@ -25,26 +25,28 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<int> tableNumbers = List<int>.generate(15, (i) => i);
   List<Padding> tables = List<Padding>.generate(
-      15,
-      (i) => Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.cyan.withOpacity(0.7),
-                borderRadius: BorderRadius.circular(4.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Table ${i + 1}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                  ),
-                ),
-              ),
+    15,
+    (i) => Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.cyan.withOpacity(0.7),
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Table ${((i)% 3) + 1}',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
             ),
-          ));
+          ),
+        ),
+      ),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -54,22 +56,18 @@ class _HomePageState extends State<HomePage> {
           title: Text('Rail Wheel Factory'),
           backgroundColor: Color(0xFF5B58E3),
         ),
-//        drawer: Drawer(
-//          child: ListView(
-//            children: <Widget>[
-//              MyDrawerWidget(),
-//            ],
-//          ),
-//        ),
-        body: ListView(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Text('XC'),
-                Row(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
                   children: <Widget>[
+                    Text('XC'),
                     SizedBox(width: 5),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
@@ -93,18 +91,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 14.0,
-            ),
-            Column(
-              children: <Widget>[
-                Text('XC Producing Moulds'),
-                Row(
+                SizedBox(
+                  height: 6.0,
+                ),
+                Column(
                   children: <Widget>[
+                    Text('XC Producing Moulds'),
                     SizedBox(width: 5),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
@@ -131,18 +126,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 14.0,
-            ),
-            Column(
-              children: <Widget>[
-                Text('Grinding'),
-                Row(
+                SizedBox(
+                  height: 6.0,
+                ),
+                Column(
                   children: <Widget>[
+                    Text('Grinding'),
                     SizedBox(width: 5),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
@@ -166,18 +158,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 14.0,
-            ),
-            Column(
-              children: <Widget>[
-                Text('Offload'),
-                Row(
+                SizedBox(
+                  height: 6.0,
+                ),
+                Column(
                   children: <Widget>[
+                    Text('Offload'),
                     SizedBox(width: 5),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
@@ -201,18 +190,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 14.0,
-            ),
-            Column(
-              children: <Widget>[
-                Text('RHT'),
-                Row(
+                SizedBox(
+                  height: 6.0,
+                ),
+                Column(
                   children: <Widget>[
+                    Text('RHT'),
                     SizedBox(width: 5),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
@@ -238,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

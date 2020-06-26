@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:RWF/main.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +20,14 @@ List<String> colNames = [];
 int noOfColumns = 0;
 List<DataColumn> colHeaders = [];
 List<DataRow> tuples = [];
+StreamController<String> controller = StreamController();
+Stream stream;
 
 class _XcProducingMoulds1State extends State<XcProducingMoulds1> {
   getData() async {
     colNames = [];
     //var url = 'https://c00c9f1e.ngrok.io/4';
-    var response = await http.get(url+"/4");
+    var response = await http.get(url + "/4");
     print('Response status: ${response.statusCode}');
     var data = response.body;
     //debugPrint(data);
@@ -46,6 +49,9 @@ class _XcProducingMoulds1State extends State<XcProducingMoulds1> {
       colNames.add(temp);
     }
     print(colNames);
+    setState(() {
+      controller.add('triggered refresh');
+    });
   }
 
   @override
@@ -53,6 +59,10 @@ class _XcProducingMoulds1State extends State<XcProducingMoulds1> {
     getData();
     colHeaders = getColNames();
     super.initState();
+    stream = controller.stream;
+    stream.listen((val) {
+      print(val);
+    });
   }
 
   var dummyTable = DataTable(
@@ -96,14 +106,16 @@ class _XcProducingMoulds1State extends State<XcProducingMoulds1> {
               6, (i) => DataColumn(label: Text('Waiting'))),
       rows: tuples ??
           [
-            DataRow(cells: [
-              DataCell(Text('...')),
-              DataCell(Text('...')),
-              DataCell(Text('...')),
-              DataCell(Text('...')),
-              DataCell(Text('...')),
-              DataCell(Text('...')),
-            ]),
+            DataRow(
+              cells: [
+                DataCell(Text('...')),
+                DataCell(Text('...')),
+                DataCell(Text('...')),
+                DataCell(Text('...')),
+                DataCell(Text('...')),
+                DataCell(Text('...')),
+              ],
+            ),
           ],
     );
     return SafeArea(
@@ -134,13 +146,14 @@ class _XcProducingMoulds1State extends State<XcProducingMoulds1> {
   static List<DataColumn> getColNames() {
     List<DataColumn> colChildren = [];
     for (int i = 0; i < colNames.length; i++) {
-      colChildren.add(DataColumn(label: Text(colNames[i]??'null')));
+      colChildren.add(DataColumn(label: Text(colNames[i] ?? 'null')));
     }
     print(colChildren.length);
     noOfColumns = colChildren.length;
     print(colChildren);
     colHeaders = colChildren;
     getTuples();
+    controller.add('triggered refresh');
     return colChildren;
   }
 
@@ -159,5 +172,6 @@ class _XcProducingMoulds1State extends State<XcProducingMoulds1> {
       );
     }
     tuples = temp;
+    controller.add('triggered refresh');
   }
 }

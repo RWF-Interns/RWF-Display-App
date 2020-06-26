@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:RWF/main.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ List<String> colNames = [];
 int noOfColumns = 0;
 List<DataColumn> colHeaders = [];
 List<DataRow> tuples = [];
+StreamController<String> controller = StreamController();
+Stream stream;
 
 class _Rht2State extends State<Rht2> {
   getData() async {
@@ -46,6 +49,9 @@ class _Rht2State extends State<Rht2> {
       colNames.add(temp);
     }
     print(colNames);
+    setState(() {
+      controller.add("triggered refresh");
+    });
   }
 
   @override
@@ -53,6 +59,10 @@ class _Rht2State extends State<Rht2> {
     getData();
     colHeaders = getColNames();
     super.initState();
+    stream = controller.stream;
+    stream.listen((event) {
+      print(event);
+    });
   }
 
   var dummyTable = DataTable(
@@ -141,6 +151,7 @@ class _Rht2State extends State<Rht2> {
     print(colChildren);
     colHeaders = colChildren;
     getTuples();
+    controller.add("triggered refresh");
     return colChildren;
   }
 
@@ -159,5 +170,6 @@ class _Rht2State extends State<Rht2> {
       );
     }
     tuples = temp;
+    controller.add("triggered refresh");
   }
 }

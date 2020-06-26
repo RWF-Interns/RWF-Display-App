@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-var url = 'http://68e89c84.ngrok.io';
+var url = 'https://9f0488506560.ngrok.io';
 
 class MyApp extends StatelessWidget {
   @override
@@ -27,6 +27,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Rail Wheel Factory',
       initialRoute: '/',
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: Color(0xFF5B58E3),
+        ),
+        accentColor: Color(0xFF5B58E3),
+      ),
       routes: {
         '/': (context) => HomePage(),
         HomePage.routeName: (context) => HomePage(),

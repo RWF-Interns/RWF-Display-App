@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:RWF/main.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +20,14 @@ List<String> colNames = [];
 int noOfColumns = 0;
 List<DataColumn> colHeaders = [];
 List<DataRow> tuples = [];
+StreamController<String> controller = StreamController();
+Stream stream;
 
 class _Grinding2State extends State<Grinding2> {
   getData() async {
     colNames = [];
     //var url = 'https://c00c9f1e.ngrok.io/11';
-    var response = await http.get(url+"/11");
+    var response = await http.get(url + "/11");
     print('Response status: ${response.statusCode}');
     var data = response.body;
     //debugPrint(data);
@@ -46,6 +49,9 @@ class _Grinding2State extends State<Grinding2> {
       colNames.add(temp);
     }
     print(colNames);
+    setState(() {
+      controller.add("triggered refresh");
+    });
   }
 
   @override
@@ -53,6 +59,10 @@ class _Grinding2State extends State<Grinding2> {
     getData();
     colHeaders = getColNames();
     super.initState();
+    stream = controller.stream;
+    stream.listen((event) {
+      print(event);
+    });
   }
 
   var dummyTable = DataTable(
@@ -134,13 +144,14 @@ class _Grinding2State extends State<Grinding2> {
   static List<DataColumn> getColNames() {
     List<DataColumn> colChildren = [];
     for (int i = 0; i < colNames.length; i++) {
-      colChildren.add(DataColumn(label: Text(colNames[i]??'null')));
+      colChildren.add(DataColumn(label: Text(colNames[i] ?? 'null')));
     }
     print(colChildren.length);
     noOfColumns = colChildren.length;
     print(colChildren);
     colHeaders = colChildren;
     getTuples();
+    controller.add("triggered refresh");
     return colChildren;
   }
 
@@ -159,5 +170,6 @@ class _Grinding2State extends State<Grinding2> {
       );
     }
     tuples = temp;
+    controller.add("triggered refresh");
   }
 }

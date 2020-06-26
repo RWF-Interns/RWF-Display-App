@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:RWF/main.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +20,14 @@ List<String> colNames = [];
 int noOfColumns = 0;
 List<DataColumn> colHeaders = [];
 List<DataRow> tuples = [];
+StreamController<String> controller = StreamController();
+Stream stream;
 
 class _Grinding3State extends State<Grinding3> {
   getData() async {
     colNames = [];
     //var url = 'https://c00c9f1e.ngrok.io/12';
-    var response = await http.get(url+"/12");
+    var response = await http.get(url + "/12");
     print('Response status: ${response.statusCode}');
     var data = response.body;
     //debugPrint(data);
@@ -46,6 +49,9 @@ class _Grinding3State extends State<Grinding3> {
       colNames.add(temp);
     }
     print(colNames);
+    setState(() {
+      controller.add("triggered refresh");
+    });
   }
 
   @override
@@ -53,6 +59,10 @@ class _Grinding3State extends State<Grinding3> {
     getData();
     colHeaders = getColNames();
     super.initState();
+    stream = controller.stream;
+    stream.listen((event) {
+      print(event);
+    });
   }
 
   var dummyTable = DataTable(
@@ -111,14 +121,16 @@ class _Grinding3State extends State<Grinding3> {
         appBar: AppBar(
           title: Text('Grinding3'),
         ),
-        body: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: noOfColumns > 0 ? originalTable : dummyTable,
-            ),
-          ],
+        body: Scrollbar(
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: noOfColumns > 0 ? originalTable : dummyTable,
+              ),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
@@ -134,13 +146,14 @@ class _Grinding3State extends State<Grinding3> {
   static List<DataColumn> getColNames() {
     List<DataColumn> colChildren = [];
     for (int i = 0; i < colNames.length; i++) {
-      colChildren.add(DataColumn(label: Text(colNames[i]??'null')));
+      colChildren.add(DataColumn(label: Text(colNames[i] ?? 'null')));
     }
     print(colChildren.length);
     noOfColumns = colChildren.length;
     print(colChildren);
     colHeaders = colChildren;
     getTuples();
+    controller.add("triggered refresh");
     return colChildren;
   }
 
@@ -159,5 +172,6 @@ class _Grinding3State extends State<Grinding3> {
       );
     }
     tuples = temp;
+    controller.add("triggered refresh");
   }
 }
